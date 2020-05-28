@@ -1,0 +1,115 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://KinematicBody2D.gd" type="Script" id=1]
+[ext_resource path="res://chatcho.png" type="Texture" id=2]
+[ext_resource path="res://floor.png" type="Texture" id=3]
+[ext_resource path="res://Area2D.gd" type="Script" id=4]
+[ext_resource path="res://maskMat.tres" type="Material" id=5]
+[ext_resource path="res://icon.png" type="Texture" id=6]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 66.9719, 66.3259 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 811.507, 54.83 )
+
+[sub_resource type="VisualShader" id=3]
+code = "shader_type canvas_item;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Output:0
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+graph_offset = Vector2( -504.5, 118.167 )
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2( 400, 240 )
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 3 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 779.314, 182.161 )
+
+[node name="Node2D" type="Node2D"]
+__meta__ = {
+"_edit_horizontal_guides_": [ 0.14064 ]
+}
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+material = ExtResource( 5 )
+position = Vector2( -1.58013, -7.15203 )
+scale = Vector2( 0.996706, 1.01836 )
+z_index = -1
+color = Color( 0.858824, 1, 0.929412, 1 )
+antialiased = true
+texture = ExtResource( 6 )
+texture_offset = Vector2( 16, 0 )
+polygon = PoolVector2Array( -11.5363, 605.957, -22.0998, -15.5498, 1038.67, -21.1758, 1040.03, 614.12 )
+
+[node name="Joueur" type="KinematicBody2D" parent="."]
+position = Vector2( 456.317, 30.5259 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="chatcho" type="Sprite" parent="Joueur"]
+scale = Vector2( 0.25706, 0.25706 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Joueur"]
+visible = false
+position = Vector2( 2.70178, -2.16147 )
+shape = SubResource( 1 )
+
+[node name="Area2D" type="Area2D" parent="Joueur"]
+position = Vector2( 1.90002, -66.5 )
+scale = Vector2( 0.7, 0.7 )
+script = ExtResource( 4 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Joueur/Area2D"]
+scale = Vector2( 1.42857, 1.42857 )
+shape = SubResource( 1 )
+
+[node name="sol" type="StaticBody2D" parent="."]
+position = Vector2( 505.966, 494.52 )
+scale = Vector2( 0.7, 0.7 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="sol"]
+position = Vector2( 15.829, 118.718 )
+shape = SubResource( 2 )
+
+[node name="Polygon2D2" type="Polygon2D" parent="sol"]
+visible = false
+material = SubResource( 4 )
+z_index = -1
+color = Color( 0.686275, 0.85098, 0.980392, 1 )
+polygon = PoolVector2Array( -347.187, 42.7007, -345.336, -46.1291, 343.094, -46.1291, 346.796, 38.9995 )
+
+[node name="floor" type="Sprite" parent="sol"]
+position = Vector2( 14.118, -409.662 )
+texture = ExtResource( 3 )
+
+[node name="Mousse" type="Area2D" parent="sol"]
+
+[node name="mousseCollision" type="CollisionShape2D" parent="sol/Mousse"]
+shape = SubResource( 5 )
+
+[node name="cache" type="Polygon2D" parent="."]
